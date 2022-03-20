@@ -23,8 +23,11 @@ button:hover {
   background: darkorange;
 }
 
-.container {
+.weatherAppWrapper {
   margin: 50px;
+}
+
+.weatherApp {
   padding: 50px;
   border: 2px solid grey;
   border-radius: 30px;
