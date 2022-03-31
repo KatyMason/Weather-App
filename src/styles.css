@@ -61,6 +61,10 @@ button:hover {
   transition: all 200ms ease-in-out;
   cursor: pointer;
 }
+
+.weatherDescription {
+  text-transform: capitalize;
+}
 .weekday {
   font-size: 15pt;
   font-weight: bold;
