@@ -47,6 +47,16 @@ function displayWeather(response) {
   document.querySelector("#todays-windspeed").innerHTML = `${wind}km/h`;
   let humidity = response.data.main.humidity;
   document.querySelector("#todays-humidity").innerHTML = `${humidity}%`;
+  let weatherIcon = response.data.weather[0].icon;
+  document
+    .querySelector("#weather-icon")
+    .setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${weatherIcon}@2x.png`
+    );
+  document
+    .querySelector("#weather-icon")
+    .setAttribute("alt", "response.data.weather[0].description");
 }
 
 function searchCity(city) {
