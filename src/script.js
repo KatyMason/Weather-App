@@ -39,8 +39,10 @@ h2.innerHTML = `${day} ${date} ${month} ${hour}:${minutes}`;
 
 function displayWeather(response) {
   document.querySelector("#city").innerHTML = response.data.name;
-  let temperature = Math.round(response.data.main.temp);
-  document.querySelector("#todays-temperature").innerHTML = `${temperature}°C`;
+  let celciusTemperature = Math.round(response.data.main.temp);
+  document.querySelector(
+    "#todays-temperature"
+  ).innerHTML = `${celciusTemperature}°C`;
   document.querySelector("#weather-description").innerHTML =
     response.data.weather[0].description;
   let wind = Math.round(response.data.wind.speed);
@@ -74,8 +76,6 @@ document
   .querySelector("#location-search-form")
   .addEventListener("submit", handleSubmit);
 
-searchCity("London");
-
 function searchLocation(position) {
   let apiKey = "331c76d641825dad26f812aa56daaa6c";
   let positionApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&&units=metric`;
@@ -89,3 +89,30 @@ function getCurrentLocation(event) {
 document
   .querySelector("#current-location-button")
   .addEventListener("click", getCurrentLocation);
+
+function changeFormatFahrenheit(event) {
+  event.preventDefault();
+  let todaysTemperature = document.querySelector("#todays-temperature");
+  let fahrenheitTemperature = Math.round((celciusTemperature * 9) / 5 + 32);
+  todaysTemperature.innerHTML = `${fahrenheitTemperature}°F`;
+  formatCelsius.classList.remove("active");
+  formatFahrenheit.classList.add("active");
+}
+
+let formatFahrenheit = document.querySelector("#fahrenheit");
+formatFahrenheit.addEventListener("click", changeFormatFahrenheit);
+
+function changeFormatCelsius(event) {
+  event.preventDefault();
+  let todaysTemperature = document.querySelector("#todays-temperature");
+  todaysTemperature.innerHTML = `${celciusTemperature}°C`;
+  formatFahrenheit.classList.remove("active");
+  formatCelsius.classList.add("active");
+}
+
+let formatCelsius = document.querySelector("#celsius");
+formatCelsius.addEventListener("click", changeFormatCelsius);
+
+let celciusTemperature = null;
+
+searchCity("London");

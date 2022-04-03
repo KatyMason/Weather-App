@@ -62,6 +62,11 @@ button:hover {
   cursor: pointer;
 }
 
+.active {
+  cursor: default;
+  color: grey;
+}
+
 .weatherDescription {
   text-transform: capitalize;
 }
