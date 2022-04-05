@@ -39,7 +39,7 @@ h2.innerHTML = `${day} ${date} ${month} ${hour}:${minutes}`;
 
 function displayWeather(response) {
   document.querySelector("#city").innerHTML = response.data.name;
-  let celciusTemperature = Math.round(response.data.main.temp);
+  celciusTemperature = Math.round(response.data.main.temp);
   document.querySelector(
     "#todays-temperature"
   ).innerHTML = `${celciusTemperature}°C`;
