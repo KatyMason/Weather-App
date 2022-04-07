@@ -70,20 +70,18 @@ button:hover {
 .weatherDescription {
   text-transform: capitalize;
 }
-.weekday {
-  font-size: 15pt;
+.weatherForecastDate {
   font-weight: bold;
-  text-align: center;
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.futureWeather {
-  font-size: 15pt;
-  text-align: center;
+.forecastLowTemperature {
+  opacity: 0.6;
 }
 
-.weekdayWeather {
-  font-size: 30pt;
+.weatherForecast {
+  font-size: 15pt;
+  text-align: center;
 }
 
 .opensourceLink {
