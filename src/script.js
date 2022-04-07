@@ -115,4 +115,21 @@ formatCelsius.addEventListener("click", changeFormatCelsius);
 
 let celciusTemperature = null;
 
+function displayForecast() {
+  let forecast = document.querySelector("#forecast");
+  forecast.innerHTML = `
+  <div class="row">
+              <div class="col-2">
+                <div class="weatherForecastDate">Tuesday</div>
+                <img src="" alt="" />
+                <div class="weatherForecastTemperatures">
+                  <span class="forecastHighTemperature">22°C</span>
+                  <span class="forecastLowTemperature">10°C</span>
+                </div>
+              </div>
+            </div>`;
+}
+
+displayForecast();
+
 searchCity("London");
