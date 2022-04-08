@@ -59,6 +59,8 @@ function displayWeather(response) {
   document
     .querySelector("#weather-icon")
     .setAttribute("alt", "response.data.weather[0].description");
+
+  getForecast(response.data.coord);
 }
 
 function searchCity(city) {
@@ -115,27 +117,49 @@ formatCelsius.addEventListener("click", changeFormatCelsius);
 
 let celciusTemperature = null;
 
-function displayForecast() {
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
+  return days[day];
+}
+
+function displayForecast(response) {
+  let weatherForecast = response.data.daily;
   let forecast = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
-  let days = ["Thur", "Fri", "Sat", "Sun"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
+  weatherForecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `
                 <div class="col-2">
-                <div class="weatherForecastDate">${day}</div>
-                <img src="" alt="" />
+                <div class="weatherForecastDate">${formatDay(
+                  forecastDay.dt
+                )}</div>
+                <img src="http://openweathermap.org/img/wn/${
+                  forecastDay.weather[0].icon
+                }@2x.png" alt="" />
                 <div class="weatherForecastTemperatures">
-                  <span class="forecastHighTemperature">22°C</span>
-                  <span class="forecastLowTemperature">10°C</span>
+                  <span class="forecastHighTemperature">${Math.round(
+                    forecastDay.temp.max
+                  )}°C</span>
+                  <span class="forecastLowTemperature">${Math.round(
+                    forecastDay.temp.min
+                  )}°C</span>
                 </div>
               </div>`;
+    }
   });
+
   forecastHTML = forecastHTML + `</div>`;
   forecast.innerHTML = forecastHTML;
 }
 
-displayForecast();
+function getForecast(coordinates) {
+  let apiKey = "331c76d641825dad26f812aa56daaa6c";
+  let forecastApi = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(forecastApi).then(displayForecast);
+}
 
 searchCity("London");
