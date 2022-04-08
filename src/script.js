@@ -46,7 +46,7 @@ function displayWeather(response) {
   document.querySelector("#weather-description").innerHTML =
     response.data.weather[0].description;
   let wind = Math.round(response.data.wind.speed);
-  document.querySelector("#todays-windspeed").innerHTML = `${wind}km/h`;
+  document.querySelector("#todays-windspeed").innerHTML = `${wind}m/s`;
   let humidity = response.data.main.humidity;
   document.querySelector("#todays-humidity").innerHTML = `${humidity}%`;
   let weatherIcon = response.data.weather[0].icon;
